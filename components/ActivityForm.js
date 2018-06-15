@@ -18,12 +18,14 @@ export default class ActivityForm extends React.Component {
           placeholder="What do you want to do?"
           onChangeText={activity => this.setState({ activity })}
           style={styles.activityInput}
+          required
         />
 
         <TextInput
           placeholder="Where do you want to go?"
           onChangeText={state => this.setState({ state })}
           style={styles.stateInput}
+          required
         />
 
         <Button
@@ -31,7 +33,7 @@ export default class ActivityForm extends React.Component {
             fetch(
               `https://ridb.recreation.gov/api/v1/recareas?state=${
                 this.state.state
-              }&activity=${this.state.activity}&limit=5`,
+              }&activity=${this.state.activity}&limit=50`,
               {
                 method: 'GET',
                 headers: {
@@ -44,8 +46,20 @@ export default class ActivityForm extends React.Component {
               .then(res => res.json())
               .then(data => data.RECDATA)
               .then(info => {
-                info.length > 0
-                  ? this.props.navigation.navigate('MapPage', { info })
+                if (info.length > 0) {
+                  return info.filter(option => {
+                    return (
+                      option.GEOJSON &&
+                      option.RecAreaDescription &&
+                      option.RecAreaName
+                    );
+                  });
+                }
+              })
+              .then(finalResult => {
+                console.log(finalResult);
+                finalResult
+                  ? this.props.navigation.navigate('MapPage', { finalResult })
                   : Alert.alert('Nothing to do here...', 'Try Again');
               });
           }}

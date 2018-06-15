@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, Alert } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { avgLatLong, getRegionForCoordinates, coords } from '../utils/utils';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import { getRegionForCoordinates, coords } from '../utils/utils';
 
 export default class MapPage extends React.Component {
   constructor(props) {
@@ -10,9 +10,8 @@ export default class MapPage extends React.Component {
   }
 
   render() {
-    const activities = this.props.navigation.state.params.info;
-    // const coordinates = avgLatLong(activities);
-    console.log(activities);
+    const activities = this.props.navigation.state.params.finalResult;
+    const coordsArr = coords(activities);
 
     return (
       <MapView
@@ -20,8 +19,19 @@ export default class MapPage extends React.Component {
         apikey="AIzaSyDeXn2oi3h3zH9M2KoHabnDJgenUB5C-no"
         style={styles.wholeMap}
         customMapStyle={mapStyle}
-        // initialRegion={getRegionForCoordinates(coords(activities))}
-      />
+        initialRegion={getRegionForCoordinates(coordsArr)}>
+        {activities.map((act, i) => (
+          <Marker
+            key={i}
+            coordinate={{
+              longitude: act.GEOJSON.COORDINATES[0],
+              latitude: act.GEOJSON.COORDINATES[1]
+            }}
+            title={act.RecAreaName}
+            description={act.RecAreaDescription}
+          />
+        ))}
+      </MapView>
     );
   }
 }

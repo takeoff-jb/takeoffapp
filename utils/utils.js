@@ -1,13 +1,5 @@
-export const avgLatLong = obj => {
-  const latitude =
-    obj.reduce((acc, cv) => acc + cv.GEOJSON.COORDINATES[1], 0) / obj.length;
-  const longitude =
-    obj.reduce((acc, cv) => acc + cv.GEOJSON.COORDINATES[0], 0) / obj.length;
-  return { latitude, longitude };
-};
-
 export const coords = actives => {
-  actives.map(location => {
+  return actives.map(location => {
     return {
       longitude: location.GEOJSON.COORDINATES[0],
       latitude: location.GEOJSON.COORDINATES[1]
