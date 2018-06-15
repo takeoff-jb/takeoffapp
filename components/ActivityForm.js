@@ -49,7 +49,7 @@ export default class ActivityForm extends React.Component {
                   : Alert.alert('Nothing to do here...', 'Try Again');
               });
           }}
-          title="Let\'s go!"
+          title="Let's go!"
         />
       </View>
     );
