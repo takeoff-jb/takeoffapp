@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Alert,
+  Picker
+} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import { availActivities, stateList } from '../utils/activityList';
 
 export default class ActivityForm extends React.Component {
   constructor(props) {
@@ -14,19 +22,25 @@ export default class ActivityForm extends React.Component {
   render() {
     return (
       <View style={styles.activityForm}>
-        <TextInput
-          placeholder="What do you want to do?"
-          onChangeText={activity => this.setState({ activity })}
-          style={styles.activityInput}
-          required
-        />
+        <Picker
+          selectedValue={this.state.activity}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ activity: itemValue })
+          }>
+          {availActivities.map(activ => {
+            return <Picker.Item label={activ} value={activ} />;
+          })}
+        </Picker>
 
-        <TextInput
-          placeholder="Where do you want to go?"
-          onChangeText={state => this.setState({ state })}
-          style={styles.stateInput}
-          required
-        />
+        <Picker
+          selectedValue={this.state.state}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ state: itemValue })
+          }>
+          {Object.keys(stateList).map(stat => {
+            return <Picker.Item label={Object.values(stat)} value={stat} />;
+          })}
+        </Picker>
 
         <Button
           onPress={() => {
