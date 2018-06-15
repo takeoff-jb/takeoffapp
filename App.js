@@ -1,22 +1,25 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import ActivityForm from './components/ActivityForm.js';
+import { createStackNavigator } from 'react-navigation';
+import Home from './components/Home';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const RootNavigator = createStackNavigator({
+  Main: {
+    screen: Home,
+    navigationOptions: {
+      headerTitle: 'Home'
+    }
+  },
+  ActivityForm: {
+    screen: ActivityForm,
+    navigationOptions: {
+      headerTitle: "Let's go Somewhere"
+    }
   }
+});
 
-  render() {
-    return (
-      <View style={styles.parent}>
-        <Text style={styles.title}> Hello World </Text>
-        <ActivityForm />
-      </View>
-    );
-  }
-}
+export default RootNavigator;
 
 const styles = StyleSheet.create({
   parent: {

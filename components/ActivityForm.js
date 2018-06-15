@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
 export default class ActivityForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activity: ''
+      activity: '',
+      state: ''
     };
   }
 
@@ -17,6 +19,13 @@ export default class ActivityForm extends React.Component {
           onChangeText={activity => this.setState({ activity })}
           style={styles.activityInput}
         />
+
+        <TextInput
+          placeholder="Where do you want to go?"
+          onChangeText={state => this.setState({ state })}
+          style={styles.stateInput}
+        />
+
         <Button
           onPress={() => {
             Alert.alert('Lets go to the map');
@@ -35,6 +44,10 @@ const styles = StyleSheet.create({
     padding: 10
   },
   activityInput: {
+    height: 100,
+    fontSize: 40
+  },
+  stateInput: {
     height: 100,
     fontSize: 40
   }
