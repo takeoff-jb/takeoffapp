@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import ActivityForm from './components/ActivityForm.js';
 import { createStackNavigator } from 'react-navigation';
 import Home from './components/Home';
+import MapPage from './components/MapPage';
 
 const RootNavigator = createStackNavigator({
   Main: {
@@ -15,6 +16,12 @@ const RootNavigator = createStackNavigator({
     screen: ActivityForm,
     navigationOptions: {
       headerTitle: "Let's go Somewhere"
+    }
+  },
+  MapPage: {
+    screen: MapPage,
+    navigationOptions: {
+      headerTitle: 'This is my map'
     }
   }
 });

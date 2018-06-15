@@ -28,9 +28,28 @@ export default class ActivityForm extends React.Component {
 
         <Button
           onPress={() => {
-            Alert.alert('Lets go to the map');
+            fetch(
+              `https://ridb.recreation.gov/api/v1/recareas?state=${
+                this.state.state
+              }&activity=${this.state.activity}&limit=5`,
+              {
+                method: 'GET',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                  apikey: 'E988373257A048189740F92931B253E1'
+                }
+              }
+            )
+              .then(res => res.json())
+              .then(data => data.RECDATA)
+              .then(info => {
+                info.length > 0
+                  ? this.props.navigation.navigate('MapPage', { info })
+                  : Alert.alert('Nothing to do here...', 'Try Again');
+              });
           }}
-          title="Let's Go!"
+          title="Let\'s go!"
         />
       </View>
     );
