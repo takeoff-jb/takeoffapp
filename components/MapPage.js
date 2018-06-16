@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button, Alert } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { getRegionForCoordinates, coords } from '../utils/utils';
 
@@ -28,7 +28,8 @@ export default class MapPage extends React.Component {
               latitude: act.GEOJSON.COORDINATES[1]
             }}
             title={act.RecAreaName}
-            description={act.RecAreaDescription}
+            description={act.RecAreaDescription.replace(/(<([^>]+)>)/g, '')}
+            onPress={e => console.log(e.nativeEvent)}
           />
         ))}
       </MapView>

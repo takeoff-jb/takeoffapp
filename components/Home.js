@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Image,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 class Home extends React.Component {
@@ -22,15 +15,6 @@ class Home extends React.Component {
             source={require('../utils/title-image.png')}
           />
         </TouchableOpacity>
-        {/* <Image source={require('../utils/title-image.png')} /> */}
-        {/* <Button */}
-        {/* // style={styles.button}
-          // onPress={() =>
-          //   this.props.navigation.navigate('ActivityForm', { hello: 'world' })
-          // }
-        //   title="Let's Get Started"
-        //   color="red" */}
-        // />
       </View>
     );
   }
@@ -49,10 +33,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'red'
   }
-  // button: {
-  //   fontSize: 20,
-  //   fontWeight: 'bold'
-  // }
 });
 
 export default Home;
