@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Alert,
+  Picker,
+  Text
+} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import { availActivities, stateList } from '../utils/activityList';
 
 export default class ActivityForm extends React.Component {
   constructor(props) {
@@ -14,19 +23,28 @@ export default class ActivityForm extends React.Component {
   render() {
     return (
       <View style={styles.activityForm}>
-        <TextInput
-          placeholder="What do you want to do?"
-          onChangeText={activity => this.setState({ activity })}
-          style={styles.activityInput}
-          required
-        />
-
-        <TextInput
-          placeholder="Where do you want to go?"
-          onChangeText={state => this.setState({ state })}
-          style={styles.stateInput}
-          required
-        />
+      <Text>What do you want to do?</Text>
+        <Picker
+          selectedValue={this.state.activity}
+          onValueChange={(itemValue) =>
+            this.setState({ activity: itemValue })
+          }
+        >
+          {availActivities.map(activ => {
+            return <Picker.Item key={activ} label={activ} value={activ} />;
+          })}
+        </Picker>
+        <Text>Where we heading?</Text>
+         <Picker
+          selectedValue={this.state.state}
+          onValueChange={(itemValue) =>
+            this.setState({ state: itemValue })
+          }
+        > 
+          {Object.keys(stateList).map((state, i) => {
+            return <Picker.Item key={state} label={stateList[state]} value={state} />;
+          })} 
+        </Picker> 
 
         <Button
           onPress={() => {
