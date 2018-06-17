@@ -31,15 +31,12 @@ export default class ActivityPage extends Component {
       .then(data => {
         return data.json();
       })
-      // .then(data => console.log(data))
       .then(weather => this.setState({...this.prevState, weather }));
-    // .then(console.log(this.getState())
   }
 
   render() {
     console.log(this.state);
     const selected = this.props.navigation.state.params.act;
-    // console.log(this.props.navigation.state.params.act)
     return (
       <ScrollView>
         <View style={styles.line}>
