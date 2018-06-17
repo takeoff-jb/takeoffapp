@@ -11,8 +11,9 @@ class Home extends React.Component {
             this.props.navigation.navigate('ActivityForm', { hello: 'world' })
           }>
           <Image
-            style={styles.button}
+            // style={styles.image}
             source={require('../utils/title-image.png')}
+            resizeMode="contain"
           />
         </TouchableOpacity>
       </View>
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'red'
   }
+  // image: {
+  //   flex: 1
+  // }
 });
 
 export default Home;
