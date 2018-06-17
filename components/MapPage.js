@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Button } from 'react-native-maps';
 import { getRegionForCoordinates, coords } from '../utils/utils';
 
 export default class MapPage extends React.Component {
@@ -12,6 +12,7 @@ export default class MapPage extends React.Component {
   render() {
     const activities = this.props.navigation.state.params.finalResult;
     const coordsArr = coords(activities);
+    const _callout = (act) => this.props.navigation.navigate('ActivityPage', {act})
 
     return (
       <MapView
@@ -29,7 +30,11 @@ export default class MapPage extends React.Component {
             }}
             title={act.RecAreaName}
             description={act.RecAreaDescription.replace(/(<([^>]+)>)/g, '')}
-            onPress={e => console.log(e.nativeEvent)}
+            onPress={() => this.props.navigation.navigate('ActivityPage', {act}) }
+            // onCalloutPress={() => this.props.navigation.navigate('ActivityPage', {act})}
+            // onPress={(act) => callout(act)}
+
+            
           />
         ))}
       </MapView>

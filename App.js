@@ -4,6 +4,7 @@ import ActivityForm from './components/ActivityForm.js';
 import { createStackNavigator } from 'react-navigation';
 import Home from './components/Home';
 import MapPage from './components/MapPage';
+import ActivityPage from './components/ActivityPage.js';
 
 const RootNavigator = createStackNavigator({
   Main: {
@@ -22,6 +23,12 @@ const RootNavigator = createStackNavigator({
     screen: MapPage,
     navigationOptions: {
       headerTitle: 'This is my map'
+    }
+  },
+  ActivityPage: {
+    screen: ActivityPage,
+    navigationOptions: {
+      headerTitle: 'Activity Page'
     }
   }
 });

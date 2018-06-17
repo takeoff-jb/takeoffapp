@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Button, Alert, Picker, Text } from 'react-native';
+import { StyleSheet, ScrollView, Button, Alert, Picker, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { availActivities, stateList } from '../utils/activityList';
 
@@ -14,7 +14,7 @@ export default class ActivityForm extends React.Component {
 
   render() {
     return (
-      <View style={styles.activityForm}>
+      <ScrollView style={styles.activityForm}>
         <Text style={styles.activityInput}>What do you want to do?</Text>
         <Picker
           selectedValue={this.state.activity}
@@ -70,7 +70,7 @@ export default class ActivityForm extends React.Component {
           }}
           title="Let's go!"
         />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -78,16 +78,18 @@ export default class ActivityForm extends React.Component {
 const styles = StyleSheet.create({
   activityForm: {
     flex: 1,
-    paddingTop: 100,
-    padding: 10
+    paddingTop: 10
+    // padding: 10
   },
   activityInput: {
-    height: 100,
+    height: 40,
     fontSize: 40,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: -20
   },
   stateInput: {
-    height: 100,
+    paddingBottom: -20,
+    height: 40,
     fontSize: 40,
     textAlign: 'center'
   }
