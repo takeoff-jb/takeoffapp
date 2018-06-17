@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Button, Alert, Picker, Text } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  Button,
+  Alert,
+  Picker,
+  Text,
+  View
+} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { availActivities, stateList } from '../utils/activityList';
 
@@ -14,25 +22,35 @@ export default class ActivityForm extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.activityForm}>
-        <Text style={styles.activityInput}>What do you want to do?</Text>
-        <Picker
-          selectedValue={this.state.activity}
-          onValueChange={itemValue => this.setState({ activity: itemValue })}>
-          {availActivities.map(activ => {
-            return <Picker.Item key={activ} label={activ} value={activ} />;
-          })}
-        </Picker>
-        <Text style={styles.stateInput}>Where we heading?</Text>
-        <Picker
-          selectedValue={this.state.state}
-          onValueChange={itemValue => this.setState({ state: itemValue })}>
-          {Object.keys(stateList).map((state, i) => {
-            return (
-              <Picker.Item key={state} label={stateList[state]} value={state} />
-            );
-          })}
-        </Picker>
+      <View style={styles.activityForm}>
+        <View style={styles.pickerCard}>
+          <Text style={styles.activityTitle}>What do you want to do?</Text>
+          <Picker
+            selectedValue={this.state.activity}
+            onValueChange={itemValue => this.setState({ activity: itemValue })}
+            style={styles.picker}>
+            {availActivities.map(activ => {
+              return <Picker.Item key={activ} label={activ} value={activ} />;
+            })}
+          </Picker>
+        </View>
+        <View style={styles.pickerCard}>
+          <Text style={styles.activityTitle}>Where we heading?</Text>
+          <Picker
+            selectedValue={this.state.state}
+            onValueChange={itemValue => this.setState({ state: itemValue })}
+            style={styles.picker}>
+            {Object.keys(stateList).map((state, i) => {
+              return (
+                <Picker.Item
+                  key={state}
+                  label={stateList[state]}
+                  value={state}
+                />
+              );
+            })}
+          </Picker>
+        </View>
 
         <Button
           onPress={() => {
@@ -69,8 +87,9 @@ export default class ActivityForm extends React.Component {
               });
           }}
           title="Let's go!"
+          style={styles.pickerCard}
         />
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -78,19 +97,21 @@ export default class ActivityForm extends React.Component {
 const styles = StyleSheet.create({
   activityForm: {
     flex: 1,
-    paddingTop: 10
-    // padding: 10
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  activityInput: {
+  pickerCard: {
+    flex: 3
+  },
+  activityTitle: {
     height: 40,
     fontSize: 40,
     textAlign: 'center',
     paddingBottom: -20
   },
-  stateInput: {
-    paddingBottom: -20,
-    height: 40,
-    fontSize: 40,
-    textAlign: 'center'
+  picker: {
+    width: 200,
+    backgroundColor: 'white',
+    borderColor: 'black'
   }
 });
