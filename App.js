@@ -9,19 +9,19 @@ const RootNavigator = createStackNavigator({
   Main: {
     screen: Home,
     navigationOptions: {
-      headerTitle: 'Home'
+      headerTitle: 'HOME'
     }
   },
   ActivityForm: {
     screen: ActivityForm,
     navigationOptions: {
-      headerTitle: "Let's go Somewhere"
+      headerTitle: 'LETS GO SOMEWHERE'
     }
   },
   MapPage: {
     screen: MapPage,
     navigationOptions: {
-      headerTitle: 'This is my map'
+      headerTitle: 'MAP'
     }
   }
 });
