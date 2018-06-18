@@ -5,12 +5,12 @@ import {
   Alert,
   Picker,
   Text,
-  View,
-  Icon
+  View
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import { availActivities, stateList } from '../utils/activityList';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ActivityForm extends React.Component {
   constructor(props) {
@@ -35,6 +35,7 @@ export default class ActivityForm extends React.Component {
                 this.setState({ activity: itemValue })
               }
               style={styles.picker}>
+              <Picker.Item label="Select an activity..." value="0" />
               {availActivities.map(activ => {
                 return <Picker.Item key={activ} label={activ} value={activ} />;
               })}
@@ -46,6 +47,7 @@ export default class ActivityForm extends React.Component {
               selectedValue={this.state.state}
               onValueChange={itemValue => this.setState({ state: itemValue })}
               style={styles.picker}>
+              <Picker.Item label="Select a state..." value="0" />
               {Object.keys(stateList).map((state, i) => {
                 return (
                   <Picker.Item
@@ -58,8 +60,10 @@ export default class ActivityForm extends React.Component {
             </Picker>
           </View>
 
-          <Button
-            style={styles.button}
+          <Icon.Button
+            name="plane"
+            size={40}
+            backgroundColor="grey"
             onPress={() => {
               fetch(
                 `https://ridb.recreation.gov/api/v1/recareas?state=${
@@ -92,9 +96,9 @@ export default class ActivityForm extends React.Component {
                     ? this.props.navigation.navigate('MapPage', { finalResult })
                     : Alert.alert('Nothing to do here...', 'Try Again');
                 });
-            }}
-            title="LETS GO!"
-          />
+            }}>
+            LET'S GO
+          </Icon.Button>
         </View>
       </ImageBackground>
     );

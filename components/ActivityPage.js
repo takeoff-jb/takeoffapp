@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import {
-  ScrollView,
-  Picker,
-  Text,
-  StyleSheet,
-  View,
-  PixelRatio
-} from 'react-native';
+import { ScrollView, Text, StyleSheet, View, PixelRatio } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ActivityPage extends Component {
   constructor(props) {
@@ -31,28 +25,53 @@ export default class ActivityPage extends Component {
       .then(data => {
         return data.json();
       })
-      .then(weather => this.setState({...this.prevState, weather }));
+      .then(weather => this.setState({ ...this.prevState, weather }));
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const selected = this.props.navigation.state.params.act;
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <View style={styles.line}>
           <Text style={styles.title}>{selected.RecAreaName}</Text>
-          <Text style={styles.description}>
-            {selected.RecAreaDescription.replace(/(<([^>]+)>)/g, '')}
-          </Text>
-          <Text style={styles.description}>
-            {selected.RecAreaDirections.replace(/(<([^>]+)>)/g, '')}
-          </Text>
-          <Text style={styles.description}>
-            {selected.RecAreaEmail.replace(/(<([^>]+)>)/g, '')}
-          </Text>
-          <Text style={styles.description}>
-            {selected.RecAreaPhone.replace(/(<([^>]+)>)/g, '')}
-          </Text>
+
+          {selected.RecAreaDescription ? (
+            <Text style={styles.details}>
+              <Icon name="quote-left" size={50} color="black" />{' '}
+              {selected.RecAreaDescription.replace(/(<([^>]+)>)/g, '')}{' '}
+              <Icon name="quote-right" size={50} color="black" />
+            </Text>
+          ) : (
+            ''
+          )}
+
+          {selected.RecAreaDirections ? (
+            <Text style={styles.details}>
+              <Icon name="car" size={50} color="black" />{' '}
+              {selected.RecAreaDirections.replace(/(<([^>]+)>)/g, '')}
+            </Text>
+          ) : (
+            ''
+          )}
+
+          {selected.RecAreaEmail ? (
+            <Text style={styles.details}>
+              <Icon name="envelope" size={50} color="black" />{' '}
+              {selected.RecAreaEmail.replace(/(<([^>]+)>)/g, '')}
+            </Text>
+          ) : (
+            ''
+          )}
+
+          {selected.RecAreaPhone || selected.RecAreaPhone === {} ? (
+            <Text style={styles.details}>
+              <Icon name="phone" size={50} color="black" />{' '}
+              {selected.RecAreaPhone.replace(/(<([^>]+)>)/g, '')}
+            </Text>
+          ) : (
+            ''
+          )}
         </View>
       </ScrollView>
     );
@@ -60,13 +79,17 @@ export default class ActivityPage extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 30
+  },
   title: {
-    fontSize: 40,
+    fontSize: 50,
     textAlign: 'center'
   },
-  description: {
-    fontSize: 15,
-    padding: 10
+  details: {
+    fontSize: 25,
+    padding: 40
   },
   line: {
     borderBottomColor: 'black',
