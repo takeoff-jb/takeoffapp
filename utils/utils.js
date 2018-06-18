@@ -38,3 +38,31 @@ export const getRegionForCoordinates = points => {
     longitudeDelta: deltaY
   };
 };
+
+export function weatherIcon (weather) {
+  switch (weather) {
+    case 'clear-day':
+      return 'weather-sunny';
+    case 'clear-night':
+    case 'partly-cloudy-night':
+      return 'weather-night';
+    case 'rain':
+      return 'weather-rainy';
+    case 'snow':
+      return 'weather-snowy';
+    case 'sleet' || 'hail':
+      return 'weather-hail';
+    case 'wind':
+      return 'weather-windy';
+    case 'fog':
+      return 'weather-fog';
+    case 'cloudy':
+      return 'weather-cloudy';
+    case 'thunderstorm':
+      return 'weather-lightning-rainy';
+    case 'tornado':
+      return 'weather-hurricane';
+    default:
+      return 'weather-cloudy';
+  }
+}

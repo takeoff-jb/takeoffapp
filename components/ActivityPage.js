@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, View, PixelRatio } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Micon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { weatherIcon } from '../utils/utils';
+import { toASCII } from 'punycode';
 
 export default class ActivityPage extends Component {
   constructor(props) {
@@ -29,8 +32,31 @@ export default class ActivityPage extends Component {
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
+    if (!this.state.weather) return null;
     const selected = this.props.navigation.state.params.act;
+    const currentWeather = this.state.weather.currently;
+    const dailyWeather = this.state.weather.daily.data;
+
+    const thisWeekWeather = dailyWeather.map(dayWeather => {
+      return (
+        <View key={dayWeather.time}>
+          <Micon
+            size={50}
+            style={{ color: 'steelblue' }}
+            name={weatherIcon(dayWeather.icon)}
+          />
+          <Text>
+            High : {dayWeather.temperatureHigh}
+            {String.fromCharCode(176)}
+          </Text>
+          <Text>
+            Low : {dayWeather.temperatureLow}
+            {String.fromCharCode(176)}
+          </Text>
+        </View>
+      );
+    });
     return (
       <ScrollView style={styles.container}>
         <View style={styles.line}>
@@ -72,6 +98,32 @@ export default class ActivityPage extends Component {
           ) : (
             ''
           )}
+        </View>
+        <Text style={styles.title}> Current Weather </Text>
+        <View
+          style={{
+            marginTop: 12,
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+          }}
+        >
+          <Text style={styles.details}>
+            {' '}
+            <Micon size={50} name={weatherIcon(currentWeather.icon)} />{' '}
+            {currentWeather.icon} Current Temperature:{' '}
+            {currentWeather.temperature}
+            {String.fromCharCode(176)}
+          </Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
+          {thisWeekWeather}
         </View>
       </ScrollView>
     );
