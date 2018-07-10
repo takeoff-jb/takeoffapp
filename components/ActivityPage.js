@@ -3,7 +3,11 @@ import { ScrollView, Text, StyleSheet, View, PixelRatio } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Micon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { weatherIcon } from '../utils/utils';
+// import { weatherApiKey } from 'react-native-dotenv';
+import  key  from "../config"
 import { toASCII } from 'punycode';
+
+const weatherKey = key.weatherApiKey;
 
 export default class ActivityPage extends Component {
   constructor(props) {
@@ -16,12 +20,11 @@ export default class ActivityPage extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.state.GEOJSON.COORDINATES[1])
     //excludes will reduce data pull for faster querties
     //grabbing array daily has a length of 7
     // index 0 is tmr, index 1 is the day after tmr.. etc etc
     fetch(
-      `https://api.darksky.net/forecast/ecbebdfa202e18e146a5b2d3cbd6140e/${
+      `https://api.darksky.net/forecast/${weatherKey}/${
         this.state.GEOJSON.COORDINATES[1]
       },${this.state.GEOJSON.COORDINATES[0]}?exclude=minutely,hourly,flags`
     )
@@ -32,7 +35,6 @@ export default class ActivityPage extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.state.weather) return null;
     const selected = this.props.navigation.state.params.act;
     const currentWeather = this.state.weather.currently;
