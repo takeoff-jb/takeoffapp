@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Button } from 'react-native-maps';
 import { getRegionForCoordinates, coords } from '../utils/utils';
+import key  from "../config"
+
+const mapApiKey = key.mapApiKey;
+
+
 
 export default class MapPage extends React.Component {
   constructor(props) {
@@ -17,7 +22,7 @@ export default class MapPage extends React.Component {
     return (
       <MapView
         provider={PROVIDER_GOOGLE}
-        apikey="AIzaSyDeXn2oi3h3zH9M2KoHabnDJgenUB5C-no"
+        apikey = {mapApiKey}
         style={styles.wholeMap}
         customMapStyle={mapStyle}
         initialRegion={getRegionForCoordinates(coordsArr)}>

@@ -12,6 +12,10 @@ import { createStackNavigator } from 'react-navigation';
 import { availActivities, stateList } from '../utils/activityList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import key from "../config"
+
+const ribApiKey = key.ribApiKey;
+
 export default class ActivityForm extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +78,7 @@ export default class ActivityForm extends React.Component {
                   headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
-                    apikey: 'E988373257A048189740F92931B253E1'
+                    apikey: ribApiKey
                   }
                 }
               )
